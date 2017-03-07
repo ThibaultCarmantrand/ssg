@@ -95,9 +95,8 @@ class Ssg {
   public function clean_output() {
     // Remove the output directory and regenerate it.
     if (is_dir('output')) {
-      shell_exec('rm -R output');
+      shell_exec('rm -R output/*');
     }
-    mkdir('output');
 
     // For each directory in the content directory, we create another directory in the output directory.
     $iterator = $this->scan_content_dir('');

@@ -1,8 +1,12 @@
 <!DOCTYPE html>
+<html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <script src="../../ckeditor/ckeditor.js"></script>
     <link rel="stylesheet" href="../../static/css/styles.css">
 </head>
 <body>
@@ -11,14 +15,28 @@
         <p>Un générateur de sites statiques</p>
     </header>
 
+<body>
+	<div id="introduction">
+		            <h1>Mentions Légales</h1>
+        	</div>
 
-    <main>
-        <h1>Mentions Légales</h1>
-    </main>
+    <button>Salut</button>
 
-    <footer>
-        <p>Created by Nom de l'auteur</p>
-    </footer>
+	<script>
+		// The inline editor should be enabled on an element with "contenteditable" attribute set to "true".
+		// Otherwise CKEditor will start in read-only mode.
+		var introduction = document.getElementById( 'introduction' );
+		introduction.setAttribute( 'contenteditable', true );
+
+		CKEDITOR.inline( 'introduction', {
+			// Allow some non-standard markup that we used in the introduction.
+			extraAllowedContent: 'a(documentation);abbr[title];code',
+			removePlugins: 'stylescombo',
+			extraPlugins: 'sourcedialog',
+			// Show toolbar on startup (optional).
+			startupFocus: true
+		} );
+	</script>
 </body>
-</html>
 
+</html>

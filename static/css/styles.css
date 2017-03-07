@@ -19,3 +19,8 @@ body {
     background-color: var(--white);
     color: var(--black);
 }
+
+#introduction {
+    width: 960px;
+    margin: auto;
+}
