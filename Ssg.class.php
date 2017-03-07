@@ -106,6 +106,7 @@ class Ssg {
         mkdir('output/' . $file->getFileName());
       }
     }
+
   }
 
 
