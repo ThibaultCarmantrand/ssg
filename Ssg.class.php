@@ -5,6 +5,7 @@
 class Ssg {
   // Parsedown is the Markdown interpretor we use.
   // Twig is the template engine we use.
+  private $root = '/home/thibault/php-dev/static_site_gen/';
   private $Parsedown;
   private $twigLoader;
   private $twig;
@@ -45,6 +46,22 @@ class Ssg {
    * GETTERS
    */
 
+  public function getParsedown() {
+    return $this->Parsedown;
+  }
+
+
+
+  public function getTwigLoader() {
+    return $this->twigLoader;
+  }
+
+
+
+  public function getTwig() {
+    return $this->twig;
+  }
+
 
 
 
@@ -55,10 +72,19 @@ class Ssg {
 
   private function scan_content_dir(string $directory) {
     return new FileSystemIterator(
-      'content/' . $directory,
+      $this->root . '/content/' . $directory,
       FileSystemIterator::KEY_AS_PATHNAME
     );
   }
+
+
+  private function scan_output_dir(string $directory) {
+    return new FileSystemIterator(
+      $this->root . '/output/' . $directory,
+      FileSystemIterator::KEY_AS_PATHNAME
+    );
+  }
+
 
 
 
@@ -123,5 +149,25 @@ class Ssg {
     $this->clean_output();
     $this->generate_files('articles');
     $this->generate_files('pages');
+  }
+
+
+
+  public function list_pages() {
+
+    $pages = array();
+
+    $iterator = $this->scan_output_dir('pages');
+    foreach ($iterator as $file) {
+      array_push($pages, '../output/pages/' . $file->getFileName());
+    }
+
+    return $pages;
+  }
+
+
+
+  public function add_new_file(string $title, string $content) {
+    file_put_contents($this->root . 'content/pages/' . $title . '.md', $content);
   }
 }
